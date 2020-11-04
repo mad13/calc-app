@@ -17,7 +17,6 @@ const App = () => {
     // const [ stack, setStack] = useState(""); 
     // const items = words(stack, /[^+^-^*/]+/g);
     // // Lo que ejecuta la función
-    // console.log("renderizacion de apps", items)
     // let value = items.length > 0 ? items[items.length - 1] : "0";
     return (<main className="react-calculator">
         <Result value={stack} />

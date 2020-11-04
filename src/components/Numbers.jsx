@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Button from './Button'
 
 // Dry Dont repet my self
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0]
 
 const renderButtons = (onClickNumber) => {
     // let number = 0
@@ -11,19 +11,9 @@ const renderButtons = (onClickNumber) => {
     // <Button text={number.ToString()} clickHandler={onClickNumber} />
 
     return numbers.map(
-        (number, index) => {
-
-            debugger;
-            if (index != 0 && index % 4 == 0) {
-                return (
-                    <div>
-                        <Button key={number} text={number.toString()} clickHandler={onClickNumber} />
-                        <div></div>
-                    </div>)
-            } else {
-                return <Button key={number} text={number.toString()} clickHandler={onClickNumber} />
-            }
-        }
+        (number) => (
+            <Button key={number} text={number.toString()} clickHandler={onClickNumber} />
+        )
     )
 }
 
