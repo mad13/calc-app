@@ -1,5 +1,5 @@
 // importación
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
 import words from 'lodash.words'
 import Functions from './components/Functions'
 import MathOperations from './components/MathOperations'
@@ -8,13 +8,13 @@ import Result from './components/Result'
 import './App.css'
 
 // generación de la función del componente
-const App = () => {
+const App: FC = () => {
 
     debugger
     // array desructiring
-    const [{ stack, numberSem }, setAllValues] = useState({ stack: '0', numberSem: true });
+    // const [{ stack, numberSem }, setAllValues] = useState({ stack: '0', numberSem: true });
 
-    // const [ stack, setStack] = useState(""); 
+    const [stack, setStack] = useState("");
     // const items = words(stack, /[^+^-^*/]+/g);
     // // Lo que ejecuta la función
     // let value = items.length > 0 ? items[items.length - 1] : "0";
@@ -24,20 +24,20 @@ const App = () => {
         <Numbers onClickNumber={(number) => {
 
             // solo permito seguir si esta encendido el semaforo de numeros
-            if (!numberSem) {
-                return;
-            }
+            // if (!numberSem) {
+            //     return;
+            // }
 
             debugger;
 
             const ultimoCaracter = stack.substring(stack.length - 1, stack.length);
 
-            if (number == 0) {
-                // evitar division por cero
-                if (ultimoCaracter == '/') {
-                    return setAllValues({ stack: `${stack}`.toString(), numberSem: true });
-                }
-            }
+            // if (number == 0) {
+            //     // evitar division por cero
+            //     if (ultimoCaracter == '/') {
+            //         return setStack(`${stack}`.toString());
+            //     }
+            // }
 
             // si el último es un 0 y el anteoultimo es una operacion entonces, 
             // estas ante un doble cero -  09 -08
@@ -46,36 +46,36 @@ const App = () => {
             if (ultimoCaracter == '0') {
                 if (anteUltimoCaracter == undefined || anteUltimoCaracter == "") {
                     const newStack = stack.substring(0, stack.length - 1);
-                    return setAllValues({ stack: `${newStack}${number}`.toString(), numberSem: true });
+                    return setStack(`${newStack}${number}`.toString());
                 }
                 else if (Number.isNaN(anteUltimoCaracter)) {
-                    return setAllValues({ stack: `${stack}`.toString(), numberSem: true });
+                    return setStack(`${stack}`.toString());
                 }
             }
 
-            return setAllValues({ stack: `${stack}${number}`.toString(), numberSem: true })
+            return setStack(`${stack}${number}`.toString())
         }} />
 
         <Functions
             onContentClear={(clear) => {
-                return setAllValues({ stack: "0".toString(), numberSem: true });
+                return setStack("0".toString());
             }}
 
             onDelete={(del) => {
 
                 if (stack.length > 0) {
                     const newStack = stack.substring(0, stack.length - 1);
-                    setAllValues({ stack: newStack.toString(), numberSem: true });
+                    setStack(newStack.toString());
                 }
             }}
         />
         <MathOperations
             onClickOperation={operation => {
-                setAllValues({ stack: `${stack}${operation}`.toString(), numberSem: true });
+                setStack(`${stack}${operation}`.toString());
             }}
 
             onClickEqual={operation => {
-                setAllValues({ stack: eval(`${stack}`).toString(), numberSem: false });
+                setStack(eval(`${stack}`).toString());
             }}
         />
     </main>);
